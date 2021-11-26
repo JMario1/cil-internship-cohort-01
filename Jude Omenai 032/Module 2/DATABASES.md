@@ -35,13 +35,15 @@
 - Application that require that all data has an owner.
 
 
-| Use Cases                                                | Relational Database | NoSQL Database |
-|----------------------------------------------------------|---------------------|----------------|
-| Application where the data are structured                | best                | good           |
-| Application with no particular data schema               | poor                | best           |
-| Application with real time data processing               | good                | best           |
-| Critical application where database downtime is costly   | good                | best           |
-| Social media interaction (feeds)                         | good                | best           |
-| Application where data relationship to be maintain       | best                | poor           |
-| Application where high transaction consistency is needed | best                | good           |
+| Use Cases                                                     | Relational Database | NoSQL Database | Object-Oriented  Database |
+|---------------------------------------------------------------|---------------------|----------------|---------------------------|
+| Application where the data are structured                     | best                | better         | good                      |
+| Application with no particular data schema                    | poor                | best           | poor                      |
+| Application with real time data processing                    | better              | best           | good                      |
+| Critical application where database downtime is costly        | good                | best           | better                    |
+| Social media interaction (feeds)                              | better              | best           | good                      |
+| Application where data relationship to be maintain            | best                | poor           | better                    |
+| Application where high transaction consistency is needed      | best                | good           | good                      |
+| Application a highly complex objects                          | good                | better         | best                      |
+| Application that require object persistence after termination | poor                | poor           | best                      |
 
