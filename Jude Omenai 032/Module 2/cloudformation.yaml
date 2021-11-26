@@ -1,0 +1,48 @@
+Description: CloudFormation Template for S3 bucket and Lambda function with IAM role.
+
+Parameters:
+  MyBucketName:
+    Description: provide a unique bucket name
+    Type: String
+  MyFunctionName:
+    Description: provide a lambda function name  
+    Type: String
+  MyRoleName:
+    Description: Provide a role name for lambda function role.
+    Type: String
+
+
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join ['-', [!Ref MyBucketName, 'dev']]
+
+  MyFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: "def handler(*args, **kwargs): return 200"
+      Role: 
+        Fn::GetAtt:
+          - MyFunctionRole
+          - Arn
+      Handler: index.handler
+      Runtime: python3.6    
+      FunctionName: !Ref MyFunctionName
+    DependsOn: 
+      - MyFunctionRole  
+
+  MyFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref MyRoleName
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole     
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
