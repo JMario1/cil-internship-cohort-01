@@ -1,0 +1,29 @@
+# An Ansible template to create and delete an AWS lambda function
+- hosts: localhost
+  connection: local
+
+  tasks:
+  - name: create lambda archive
+    archive:
+      path: lambda-payload.py
+      dest: lambda-payload.zip
+      format: zip
+
+  - name: Deploying lambda function with ansible
+    community.aws.lambda:
+      name: MyFunc
+      state: present
+      region: us-east-1
+      zip_file: lambda-payload.zip
+      runtime: python3.6
+      profile: admin
+      role: arn:aws:iam::153973497053:role/lambda-basic-role
+      handler: lambda-payload.handler
+
+  # - name: Delete created lambda function
+  #   community.aws.lambda:
+  #     name: MyFunc
+  #     state: absent
+  #     region: us-east-1
+  #     profile: admin    
+
