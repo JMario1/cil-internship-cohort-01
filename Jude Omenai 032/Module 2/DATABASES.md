@@ -1,3 +1,5 @@
+## DATABASE USECASE COMPARISON
+
 ### Use Cases for Relational Database
 - Online Transaction application (OLTP) due to it fast update and reterivsl time.
 - Edge devices for internet of things (IoT) that require lightweight databases.
